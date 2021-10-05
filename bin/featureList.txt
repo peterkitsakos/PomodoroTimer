@@ -1,0 +1,13 @@
+Features:
+Task list
+Pomo goal for day
+Skip current timer
+Select between Focus, Short Break, Long Break
+See Lifetime Pomos (Stats page?)
+See 
+
+Settings:
+	-	Set length of focus, short break, long break
+	-	Set timer run out noise
+	-	Set Volume
+	-	

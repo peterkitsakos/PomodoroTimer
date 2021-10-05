@@ -14,9 +14,9 @@ window.onload = () => {
 		}
 		timerSec--;
 		if(timerSec < 10){
-			timer.innerHTML = timerMin + ":0" + timerSec;
+			timer.innerHTML = `${timerMin}:0${timerSec}`;
 		}else{
-			timer.innerHTML = timerMin + ":" + timerSec;
+			timer.innerHTML = `${timerMin}:${timerSec}`;
 		}
 	}
 }

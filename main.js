@@ -4,7 +4,7 @@ const path = require('path')
 // This function initializes and loads a BrowserWindow of dimensions 1200x800px
 const loadMainWindow = () => {
 	const mainWindow = new BrowserWindow({
-		width: 1200,
+		width: 600,
 		height: 800,
 		center: true,
 		webPreferences: {

@@ -7,8 +7,9 @@ let longBreakTime = 15;
 let longBreakSessions = 3; //Number of sessions between long breaks
 
 //Variables used for timer values (timerMin:timerSec)
+let targetTime = 0;
 let timerMin = focusTime;
-let timerSec = 0;
+let timerSec = 10;
 
 let sessionNumber = 0; //Number of focuses since last long break
 let justFocused = true;
@@ -24,9 +25,14 @@ document.getElementById('start_button').addEventListener('click', () => {
 	if(running == false){
 		running = true;
 		let timer = document.getElementById('timer');
-		console.log("loaded");
+		//console.log("loaded");
 		
-		interval = setInterval(runTimer, 1000);
+		if(targetTime == 0){
+			targetTime = Date.now() + (timerMin * 60000) + (timerSec * 1000);
+		}
+
+		//console.log(`Target Time: ${targetTime}`);
+		interval = setInterval(runTimer, 100);
 	}else{
 		running = false;
 		clearInterval(interval);
@@ -34,22 +40,26 @@ document.getElementById('start_button').addEventListener('click', () => {
 });
 
 runTimer = () => {
-	if(timerSec == 0){
-		timerMin--;
-		if(timerMin == -1){
-			alarmSound.play();
-			clearInterval(interval);
-			running=false;
-			changeButtonLabel();
-			timerMin = setTimer();
-			timerSec = 1;
-		}else{
-			timerSec = 60;
-		}
+	//console.log(targetTime);
+	remaining = targetTime - Date.now()
+	if(remaining < 0){
+		alarmSound.play(); //Play alarm sound
+
+		//Stop the timer
+		clearInterval(interval);
+		changeButtonLabel();
+		running = false;
+
+		//Set Timer to correct values
+		timerMin = setTimer();
+		timerSec = 0;
+		targetTime = 0;
+	}else{
+		timerMin = Math.floor(remaining / 60000);
+		timerSec = Math.floor((remaining / 1000) % 60)
 	}
 
-	timerSec--;
-	timer.innerHTML = (timerSec < 10) ? `${timerMin}:0${timerSec}` : `${timerMin}:${timerSec}`;
+		timer.innerHTML = (timerSec < 10) ? `${timerMin}:0${timerSec}` : `${timerMin}:${timerSec}`;
 }
 
 changeButtonLabel = () => {
@@ -66,6 +76,7 @@ setTimer = () => {
 		//If completed longBreakSessions, time for long break
 		if(sessionNumber == longBreakSessions){
 			return longBreakTime;
+			sessionNumber = 0;
 		}
 
 		return breakTime;

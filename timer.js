@@ -9,7 +9,7 @@ let longBreakSessions = 3; //Number of sessions between long breaks
 //Variables used for timer values (timerMin:timerSec)
 let targetTime = 0;
 let timerMin = focusTime;
-let timerSec = 10;
+let timerSec = 0;
 
 let sessionNumber = 0; //Number of focuses since last long break
 let justFocused = true;

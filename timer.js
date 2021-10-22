@@ -20,6 +20,7 @@ window.onload = document.getElementById('timer').innerHTML = `${focusTime}:00`;
 
 document.getElementById('start_button').addEventListener('click', () => {
 
+	console.log(`Start button says: ${timerMin}`);
 	changeButtonLabel();
 
 	if(running == false){
@@ -75,8 +76,8 @@ setTimer = () => {
 		
 		//If completed longBreakSessions, time for long break
 		if(sessionNumber == longBreakSessions){
-			return longBreakTime;
 			sessionNumber = 0;
+			return longBreakTime;
 		}
 
 		return breakTime;
@@ -86,3 +87,15 @@ setTimer = () => {
 	justFocused = true;
 	return focusTime;
 }
+
+document.getElementById('skip_button').addEventListener('click', () => {
+	if(running == true){
+		running = false;
+		changeButtonLabel();
+		clearInterval(interval);
+		timerMin = setTimer();
+		timerSec = 0;
+		targetTime = 0;
+		timer.innerHTML = `${timerMin}:00`;
+	}
+});

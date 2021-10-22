@@ -21,7 +21,7 @@ connectToDatabase = () => {
 	var connection = mysql.createConnection({
 		hostname: "localhost",
 		user: "peterkitsakos",
-		password: "chieftain11"
+		password: "#########"
 	});
 
 	connection.connect(function(err){
